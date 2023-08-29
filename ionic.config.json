@@ -1,0 +1,7 @@
+{
+  "name": "artless",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
