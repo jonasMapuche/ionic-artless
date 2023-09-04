@@ -91,6 +91,55 @@ const alertSetting = [
       }
     }
   ];
+
+/*
+import { getArtless, postArtless } from '../service/http-artless';
+import { Artless, ItemArtless } from '../model/artless';
+
+let example1: string;
+
+function filterByName2(obj: any) {
+    var i: number;
+    var count: number = 0;
+    var quantity: number=0;
+    obj.forEach ((index: any)=>{
+      quantity++;
+    });
+    for(i=0;i<quantity;i++){
+      if (obj[i]=="Tiradentes é executado 1792") count++;
+    };
+    if(count>0) 
+      return true; 
+    else 
+      return false; 
+};
+
+function filterByName(obj: any) {
+    if (filterByName2(obj.artless.name)) {
+      return true;
+    } else {
+      return false;
+    };
+  };
+
+const initialize = () => {
+    const artless = getArtless().then(response=>{
+        const list2: Array<Artless> = [];
+        response.data.forEach((index: any) => {
+          const item: ItemArtless= new ItemArtless(index.artless.time_line, index.artless.framework, index.artless.name, index.date_in, index.date_out, index.artless.check, index.artless.description);
+          const obj: Artless = new Artless(index.name, item);
+          list2.push(obj);
+        });
+        var msg1: string = "";
+        list2.filter(filterByName).map(v=>v.name).forEach(msg => {
+          msg1 = msg1 + " " + msg;
+        });
+        //example1=msg1;
+        console.log(msg1);
+      });
+ };
+initialize();
+*/
 </script>
 
 <style scoped>

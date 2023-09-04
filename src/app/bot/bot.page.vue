@@ -70,12 +70,26 @@
     IonNote
   } from '@ionic/vue';
 import { arrowBackOutline, checkmarkCircleOutline, checkmarkDoneOutline, send } from 'ionicons/icons';
-import { Observable, concat, of } from 'rxjs';
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { getArtless, postArtless } from '../service/http-artless';
+import { getBot, postBot } from '../service/http-bot';
+import { Message } from '../model/message';
+import { Artless, ItemArtless } from '../model/artless';
 
 </script>
 
 <script lang="ts">
+
+  export class BotMessage {
+      id: number;
+      sender: number;
+      message: string;
+      constructor(){
+        this.id=0;
+        this.sender=0
+        this.message=""
+      }
+  };
 
   export interface UserMessage {
       id: number;
@@ -110,8 +124,53 @@ import { ref } from 'vue'
 
   const { takeMessage, sendMessage, gotoHomePage } = UseSenderMessage();
 
+  function filterByName2(obj: any) {
+    var i: number;
+    var count: number = 0;
+    var quantity: number=0;
+    obj.forEach ((index: any)=>{
+      quantity++;
+    });
+    for(i=0;i<quantity;i++){
+      if (obj[i]=="Tiradentes é executado 1792") count++;
+    };
+    if(count>0) 
+      return true; 
+    else 
+      return false; 
+  };
+
+  function filterByName(obj: any) {
+    if (filterByName2(obj.artless.name)) {
+      return true;
+    } else {
+      return false;
+    };
+  };
+
   const initialize = () => {
-    takeMessage('What can I do?', 1);
+    const body: any = {id: 1, sender: 1, message: 'What can I do?'};
+    const bot = postBot(body).then(response=>{
+      const list: Message = new Message(response.data.id, response.data.sender, response.data.message);
+      takeMessage(list.message, list.sender);
+    });
+    const artless = getArtless().then(response=>{
+      console.log(response.data);
+      const list2: Array<Artless> = [];
+      response.data.forEach((index: any) => {
+        const item: ItemArtless= new ItemArtless(index.artless.time_line, index.artless.framework, index.artless.name, index.date_in, index.date_out, index.artless.check, index.artless.description);
+        const obj: Artless = new Artless(index.name, item);
+        list2.push(obj);
+      });
+      console.log(list2);
+      var msg1: string = "";
+      list2.filter(filterByName).map(v=>v.name).forEach(msg => {
+        msg1 = msg1 + " " + msg;
+      });
+      takeMessage(msg1, 1);
+      console.log(msg1);
+    });
+
   };
 
   initialize();
