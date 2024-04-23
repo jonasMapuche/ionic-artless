@@ -1,16 +1,17 @@
 import axios from "axios";
-import { Artless } from "../model/artless";
 
 const BaseURL = axios.create({
-    baseURL: "http://api.stomach.com.br:8889/artless",
+    baseURL: "http://localhost:8889/artless",
    });
    
 export default BaseURL;
 
-const getArtless = () => BaseURL.get("/all");
+const getArtless = async () => await BaseURL.get("/all");
+
+const getName = (id: any) => BaseURL.get("/name/" + id);
 
 const postArtless = (obj: any[]) => BaseURL.post("/all", obj);
 
-export { getArtless, postArtless };
+export { getArtless, postArtless, getName };
 
 

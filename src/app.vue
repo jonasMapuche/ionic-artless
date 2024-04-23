@@ -5,9 +5,9 @@
         <ion-content>
           <ion-list class="menu">
             <ion-list-header class="head"></ion-list-header>
-            <ion-list-header class="icon"><ion-img class="image" src="../public/logo-snapchat.svg"></ion-img></ion-list-header>
+            <ion-list-header class="icon"><ion-icon :md="logoSnapchat" size="large"></ion-icon></ion-list-header>
             <ion-list-header class="note"><ion-note class="note">Welcome to Bot Artless</ion-note></ion-list-header>
-            
+             
             <ion-menu-toggle :auto-hide="false" v-for="(item, i) in appPages" :key="i">
               <ion-item @click="selectedIndex = i" router-direction="root" :router-link="item.url" lines="none" :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
                 <ion-icon aria-hidden="true" slot="start" :md="item.icon"></ion-icon>
@@ -42,14 +42,14 @@ import {
   IonMenuToggle,
   IonNote,
   IonRouterOutlet,
-  IonSplitPane,
-  IonImg
+  IonSplitPane
 } from '@ionic/vue';
 import { ref } from 'vue';
 import {
   man,
   home,
-  exitOutline
+  exitOutline,
+  logoSnapchat
 } from 'ionicons/icons';
 
 const selectedIndex = ref(0);
@@ -61,7 +61,7 @@ const appPages = [
     },
     { 
       title: 'Bot', 
-      url: '/bot', 
+      url: '/bot/null', 
       icon: man
     }
   ];
