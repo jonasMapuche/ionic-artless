@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const BaseURL = axios.create({
-    baseURL: "http://localhost:8889/artless",
+    //baseURL: "http://localhost:8889/artless"
+    baseURL: "http://api.stomach.com.br:8889/artless"
    });
    
 export default BaseURL;

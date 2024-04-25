@@ -90,7 +90,7 @@
 
   const initialize = () => {
     let msg: string = "";
-    if (name=="null") {msg = "What can I do?"} else {msg = name}; 
+    if (name=="null") {msg = "What can I do?"} else {msg = name.toString()}; 
     const body: any = {id: 1, sender: 1, message: msg};
     postBot(body)
       .then(response => {
@@ -102,6 +102,8 @@
   initialize();
 
   const sendMessage = (msg: string) => {
+    console.log(msg);
+    console.log(sender);
     const body: any = {id: 1, sender: 2, message: msg};
     postBot(body)
     .then((response) => {
