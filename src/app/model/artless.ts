@@ -1,21 +1,15 @@
-export class ItemArtless {
+export class Epigraph {
 
-    time_line: Date;
-    framework: Array<string>;
-    name: Array<string>;
+    name: String;
     date_in: Date;
     date_out: Date;
-    check: Boolean;
-    description: string;
+    title: String;
 
-    constructor(time_line: Date, framework: Array<string>, name: Array<string>, date_in: Date, date_out: Date, check: Boolean, description: string) {
-        this.time_line = time_line;
-        this.framework = framework;
+    constructor(name: String, date_in: Date, date_out: Date, title: String) {
         this.name = name;
         this.date_in = date_in;
         this.date_out = date_out;
-        this.check = check;
-        this.description = description;
+        this.title = title;
     }
 
 }
@@ -23,11 +17,19 @@ export class ItemArtless {
 export class Artless {
 
     name: Array<String>;
-    artless: ItemArtless;
+    framework: String;
+    date_in: Date;
+    date_out: Date;
+    description: String; 
+    epigraph: Epigraph;
 
-    constructor(name: Array<string>, artless: ItemArtless) {
+    constructor(name: Array<String>, framework: String, date_in: Date, date_out: Date, description: String, epigraph: Epigraph) {
         this.name = name;
-        this.artless = artless;
+        this.framework = framework;
+        this.date_in = date_in;
+        this.date_out = date_out;
+        this.description = description;
+        this.epigraph = epigraph;
     }
 
 }

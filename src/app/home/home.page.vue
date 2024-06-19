@@ -18,7 +18,7 @@
       </ion-toolbar>
     </ion-header> 
     <ion-content :fullscreen="true">
-      <ion-item v-for="(item, i) in messages" button lines="full" class="list" :key="i" @click="ButtonBot(item.name[0])">
+      <ion-item v-for="(item, i) in search(messages)" button lines="full" class="list" :key="i" @click="ButtonBot(item.name[0])">
         <ion-label>{{item.name[0]}}</ion-label>
       </ion-item>
     </ion-content>
@@ -63,8 +63,8 @@
     }
   ];
 
-  import { getArtless, getName } from '../service/http-artless';
-  import { Artless, ItemArtless } from '../model/artless';
+  import { postRange } from '../service/http-artless';
+  import { Artless, Epigraph } from '../model/artless';
   import { ref } from 'vue';
 
   const ButtonBot = (art: any) => {
@@ -74,39 +74,25 @@
   const messages = ref<Artless[]>([]);
 
   function initialize () {
-    getName("Revolta dos Alfaiates")
+    const in_date: String = "01/01/1700";
+    const out_date: String = "31/12/1761";
+    const range: any = {date_in: in_date, date_out: out_date};
+    postRange(range)
       .then(response => {
                           response.data.forEach((index: any) => {
-                            const item: ItemArtless= new ItemArtless(index.artless.time_line, index.artless.framework, index.artless.name, index.artless.date_in, index.artless.date_out, index.artless.check, index.artless.description);
-                            const obj: Artless = new Artless(index.name, item);  
+                            const title: Epigraph = new Epigraph(index.epigraph.name, index.epigraph.date_in, index.epigraph.date_in, index.title);
+                            const obj: Artless = new Artless(index.name, index.framework, index.date_in, index.date_out, index.description, title);  
                             messages.value = [obj, ...messages.value];
                           });
                         });
-    getName("1792")
-      .then(response => {
-                          response.data.forEach((index: any) => {
-                            const item: ItemArtless= new ItemArtless(index.artless.time_line, index.artless.framework, index.artless.name, index.artless.date_in, index.artless.date_out, index.artless.check, index.artless.description);
-                            const obj: Artless = new Artless(index.name, item);  
-                            messages.value = [obj, ...messages.value];
-                          });
-                        });
-    getName("1720")
-      .then(response => {
-                          response.data.forEach((index: any) => {
-                            const item: ItemArtless= new ItemArtless(index.artless.time_line, index.artless.framework, index.artless.name, index.artless.date_in, index.artless.date_out, index.artless.check, index.artless.description);
-                            const obj: Artless = new Artless(index.name, item);  
-                            messages.value = [obj, ...messages.value];
-                          });
-                        });
+
   };
 
   initialize();
 
-  /*
   function search(art: any[]) {
-     art.filter((index: { malware: any; })=>index.malware).filter((index: { name: string; })=>(index.name=="borboleta" || index.name=="jab"  || index.name=="crawl" || index.name=="uppercut" || index.name=="direto" || index.name=="cruzado" || index.name=="costas"));
+     return art.filter((index)=>(index.name=="Américas 1726" || index.name=="Ásia 1720" || index.name=="África 1705" || index.name=="Oceania Anos 1700" || index.name=="Europa 1741-61"));
   };
-  */
 
 </script>
 

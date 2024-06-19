@@ -71,10 +71,8 @@
   } from '@ionic/vue';
   import { arrowBackOutline, boat, checkmarkCircleOutline, checkmarkDoneOutline, send } from 'ionicons/icons';
   import { ref } from 'vue';
-  import { getArtless, postArtless } from '../service/http-artless';
-  import { getBot, postBot } from '../service/http-bot';
+  import { postBot } from '../service/http-bot';
   import { Message } from '../model/message';
-  import { Artless, ItemArtless } from '../model/artless';
   import { useRoute } from 'vue-router';
   const route = useRoute();
 

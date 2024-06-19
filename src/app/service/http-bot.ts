@@ -11,5 +11,7 @@ const getBot = () => BaseURL.get("/");
 
 const postBot = (obj: any[]) => BaseURL.post("/", obj);
 
-export { getBot, postBot };
+const postBotGo = (obj: any[]) => BaseURL.post("/Go", obj);
+
+export { getBot, postBot, postBotGo };
 
